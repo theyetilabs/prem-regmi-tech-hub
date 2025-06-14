@@ -1,9 +1,10 @@
-
 import React from 'react';
 import { Linkedin, Globe } from 'lucide-react';
 import TechLogo from './TechLogo';
+import { useI18n } from '@/lib/i18n';
 
 const Footer = () => {
+  const { t, lang } = useI18n();
   return (
     <footer className="bg-gradient-to-r from-yeti-blue to-purple-500 py-10 text-white relative z-10">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between pb-6 px-6">
@@ -23,7 +24,9 @@ const Footer = () => {
         </div>
       </div>
       <div className="container mx-auto text-center text-white/90 font-mono pb-2">
-        <span>© {new Date().getFullYear()} The Yeti Labs. Powered by <strong className="text-white">Lovable</strong>.</span>
+        <span dangerouslySetInnerHTML={{
+          __html: t('footer').replace('{year}', String(new Date().getFullYear()))
+        }} />
       </div>
     </footer>
   );

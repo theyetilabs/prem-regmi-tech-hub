@@ -1,38 +1,38 @@
+
 import React from 'react';
 import ModernHeader from '@/components/ModernHeader';
 import ModernHero from '@/components/ModernHero';
 import ModernSection from '@/components/ModernSection';
 import Footer from '@/components/Footer';
 import { Linkedin, Globe, Briefcase, GraduationCap, Users, Target, Lightbulb, Award } from 'lucide-react';
-import { smoothScroll } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n';
 
 const Index = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   const journeySteps = [
     {
       year: "2008-2012",
-      title: "Foundation Years",
-      description: "Bachelor's in Software Engineering at Gandaki College of Engineering and Science",
+      title: t("journeyStep1Title"),
+      description: t("journeyStep1Desc"),
       icon: GraduationCap
     },
     {
       year: "2014-2017", 
-      title: "International Education",
-      description: "Degree in Information Science from Oslo and Akershus University College",
+      title: t("journeyStep2Title"),
+      description: t("journeyStep2Desc"),
       icon: Globe
     },
     {
       year: "2018-2020",
-      title: "Industry Experience", 
-      description: "Roles at ClinchTech and Black Tech, COO at Mero Padhai",
+      title: t("journeyStep3Title"),
+      description: t("journeyStep3Desc"),
       icon: Briefcase
     },
     {
       year: "2021-Present",
-      title: "The Yeti Labs",
-      description: "Founded and leading Nepal's premier tech consulting company",
+      title: t("journeyStep4Title"),
+      description: t("journeyStep4Desc"),
       icon: Target
     }
   ];
@@ -40,22 +40,21 @@ const Index = () => {
   const visionCards = [
     {
       icon: Lightbulb,
-      title: "Innovation Leadership",
-      description: "Driving technological innovation that bridges global opportunities with local talent, creating sustainable solutions for Nepal's tech ecosystem."
+      title: t("visionCard1Title"),
+      description: t("visionCard1Desc"),
     },
     {
       icon: Users,
-      title: "Inclusive Growth", 
-      description: "Building an inclusive workforce that welcomes talent from all backgrounds, fostering diversity and equality in Nepal's tech sector."
+      title: t("visionCard2Title"),
+      description: t("visionCard2Desc"),
     },
     {
       icon: Award,
-      title: "Global Impact",
-      description: "Positioning Nepal as a premier destination for tech talent and innovation, creating opportunities that benefit both local communities and global markets."
+      title: t("visionCard3Title"),
+      description: t("visionCard3Desc"),
     }
   ];
 
-  // Remove the Yeti Labs: Global Reach (map) section 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-white via-blue-50 to-purple-50">
       <div>
@@ -66,19 +65,19 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed font-mono">
-                I am Prem Regmi, the Founder and CEO of The Yeti Labs, a technology consulting and software development company dedicated to unlocking Nepal's potential as a global technology leader. Born and raised in Pokhara in the 1990s, I was captivated by the rapid evolution of technology during my formative years.
+                {t("aboutParagraph1")}
               </p>
               <p className="text-lg text-gray-700 leading-relaxed font-mono">
-                My international education and experiences have shaped my vision to bridge global tech opportunities with Nepal's talented workforce. My passion for social contribution drives my mission to create a skilled, inclusive workforce that can compete globally.
+                {t("aboutParagraph2")}
               </p>
               <div className="flex space-x-4 pt-4">
                 <a href="https://www.linkedin.com/in/regmiprem/" target="_blank" rel="noopener noreferrer" className="btn-outline">
                   <Linkedin className="mr-2 h-5 w-5" />
-                  LinkedIn
+                  {t("linkedin")}
                 </a>
                 <a href="https://theyetilabs.com/" target="_blank" rel="noopener noreferrer" className="btn-primary">
                   <Globe className="mr-2 h-5 w-5" />
-                  Visit Website
+                  {t("website")}
                 </a>
               </div>
             </div>
@@ -132,21 +131,19 @@ const Index = () => {
           </div>
         </ModernSection>
 
-        {/* REMOVE the old Yeti Labs: Global Reach section including the Map */}
-
         <ModernSection id="connect" heading={t('connectTitle')} background="gray">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-lg text-gray-700  mb-8 leading-relaxed font-mono">
-              Ready to explore how technology can drive social impact? Let's discuss opportunities to collaborate and build Nepal's tech future together.
+              {t("connectDesc")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://www.linkedin.com/in/regmiprem/" target="_blank" rel="noopener noreferrer" className="btn-primary">
                 <Linkedin className="mr-2 h-5 w-5" />
-                Connect on LinkedIn
+                {t("connectOnLinkedin")}
               </a>
               <a href="https://theyetilabs.com/" target="_blank" rel="noopener noreferrer" className="btn-outline">
                 <Globe className="mr-2 h-5 w-5" />
-                Visit The Yeti Labs
+                {t("visitYetiLabs")}
               </a>
             </div>
           </div>
@@ -158,3 +155,5 @@ const Index = () => {
 };
 
 export default Index;
+
+// Map/country section has already been removed in previous edits

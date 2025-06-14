@@ -6,16 +6,18 @@ import { smoothScroll } from '@/lib/utils';
 import TechLogo from '@/components/TechLogo';
 
 const navItems = [
-  { name: 'About', id: 'about' },
-  { name: 'Journey', id: 'journey' },
-  { name: 'Vision', id: 'vision' },
-  { name: 'Connect', id: 'connect' },
+  { name: 'about', id: 'about' },
+  { name: 'journey', id: 'journey' },
+  { name: 'vision', id: 'vision' },
+  { name: 'connect', id: 'connect' },
 ];
+
+const JP_FLAG_SRC = "/lovable-uploads/jp-flag.png"; // ensure you have this file
 
 const ModernHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { lang, setLang, menu } = useI18n();
+  const { lang, setLang, menu, t } = useI18n();
   const menuLabels = menu();
 
   useEffect(() => {
@@ -64,9 +66,7 @@ const ModernHeader = () => {
                   onClick={() => handleNavClick(item.id)}
                   className="relative text-yeti-blue font-semibold hover:text-purple-600 transition-colors duration-300 group font-mono"
                 >
-                  <span className="text-xs text-slate-400 absolute -top-3 left-0 font-mono">
-                    0{idx + 1}
-                  </span>
+                  {/* Removed menu number */}
                   {menuLabels[idx]}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yeti-blue to-purple-600 group-hover:w-full transition-all duration-300"></span>
                 </button>
@@ -84,7 +84,16 @@ const ModernHeader = () => {
                   <option value="en">EN</option>
                   <option value="ja">日本語</option>
                 </select>
-                <Globe className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-yeti-blue pointer-events-none" />
+                {lang === 'ja' ? (
+                  <img
+                    src={JP_FLAG_SRC}
+                    alt="日本語"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 h-5 w-5 rounded-full border border-yeti-blue bg-white shadow"
+                    style={{objectFit: "cover"}}
+                  />
+                ) : (
+                  <Globe className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-yeti-blue pointer-events-none" />
+                )}
               </div>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -116,12 +125,12 @@ const ModernHeader = () => {
                   onClick={() => handleNavClick(item.id)}
                   className="block text-xl font-semibold text-yeti-blue hover:text-purple-600 transition-colors duration-300 font-mono"
                 >
-                  <span className="text-sm text-slate-400 block font-mono">0{idx + 1}</span>
+                  {/* Removed menu number */}
                   {menuLabels[idx]}
                 </button>
               ))}
             </nav>
-            <div className="mt-8">
+            <div className="mt-8 relative">
               <select
                 className="appearance-none bg-white border-2 border-yeti-blue rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium text-yeti-blue font-mono"
                 value={lang}
@@ -131,7 +140,16 @@ const ModernHeader = () => {
                 <option value="en">EN</option>
                 <option value="ja">日本語</option>
               </select>
-              <Globe className="absolute right-4 top-[74px] h-4 w-4 text-yeti-blue pointer-events-none" />
+              {lang === 'ja' ? (
+                <img
+                  src={JP_FLAG_SRC}
+                  alt="日本語"
+                  className="absolute right-4 top-[14px] h-5 w-5 rounded-full border border-yeti-blue bg-white shadow"
+                  style={{objectFit: "cover"}}
+                />
+              ) : (
+                <Globe className="absolute right-4 top-[16px] h-4 w-4 text-yeti-blue pointer-events-none" />
+              )}
             </div>
           </div>
         </div>
@@ -141,3 +159,4 @@ const ModernHeader = () => {
 };
 
 export default ModernHeader;
+
