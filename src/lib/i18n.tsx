@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-const translations = {
+export const translations = {
   en: {
     menu: ['About', 'Journey', 'Vision', 'Connect'],
     heroHi: "Hi, my name is",
@@ -136,3 +136,6 @@ export const useI18n = () => {
   if (!ctx) throw new Error('useI18n must be used within I18nProvider');
   return ctx;
 };
+
+// @ts-expect-error: Allow importing translations for static access
+export default { translations };

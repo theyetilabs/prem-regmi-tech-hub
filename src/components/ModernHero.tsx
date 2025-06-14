@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowRight, Globe, Users, Zap } from 'lucide-react';
 import { smoothScroll } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n';
+import { translations } from '@/lib/i18n';
 
 const MatrixEffect = () => (
   <div className="absolute inset-0 z-0 pointer-events-none select-none">
@@ -84,12 +85,10 @@ const MatrixRain = () => {
 const ModernHero = () => {
   const { t, lang } = useI18n();
 
-  // Get heroStats from translations object instead of t
+  // Get heroStats from translations object directly
   const heroStats = React.useMemo(() => {
-    const translationsObj = require('@/lib/i18n').default?.translations || undefined;
-    if (translationsObj && lang in translationsObj) {
-      // fallback in case translations object available
-      return translationsObj[lang]?.heroStats || translationsObj["en"].heroStats;
+    if (translations && lang in translations) {
+      return translations[lang]?.heroStats || translations["en"].heroStats;
     }
     // fallback to hardcoded values if SSR/missing
     return [
@@ -144,7 +143,7 @@ const ModernHero = () => {
               className="btn-primary group"
             >
               <span className="relative z-10 flex items-center justify-center">
-                {lang === 'ja' ? '経歴を探る' : 'Explore My Journey'}
+                {lang === 'ja' ? t('exploreBtn') : t('exploreBtn')}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>

@@ -1,8 +1,12 @@
+
 import React, { useEffect, useState } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import { smoothScroll } from '@/lib/utils';
 import TechLogo from '@/components/TechLogo';
+
+// Use available flag for Japan
+const JP_FLAG_SRC = "/lovable-uploads/jp-flag.png";
 
 const navItems = [
   { name: 'about', id: 'about' },
@@ -10,8 +14,6 @@ const navItems = [
   { name: 'vision', id: 'vision' },
   { name: 'connect', id: 'connect' },
 ];
-
-const JP_FLAG_SRC = "/lovable-uploads/jp-flag.png"; // favicon and selector
 
 const ModernHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -83,7 +85,6 @@ const ModernHeader = () => {
                   onClick={() => handleNavClick(item.id)}
                   className="relative text-yeti-blue font-semibold hover:text-purple-600 transition-colors duration-300 group font-mono"
                 >
-                  {/* Removed menu number */}
                   {menuLabels[idx]}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yeti-blue to-purple-600 group-hover:w-full transition-all duration-300"></span>
                 </button>
@@ -142,7 +143,6 @@ const ModernHeader = () => {
                   onClick={() => handleNavClick(item.id)}
                   className="block text-xl font-semibold text-yeti-blue hover:text-purple-600 transition-colors duration-300 font-mono"
                 >
-                  {/* Removed menu number */}
                   {menuLabels[idx]}
                 </button>
               ))}
