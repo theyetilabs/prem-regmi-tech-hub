@@ -54,8 +54,22 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const menu = () =>
     translations[lang].menu || translations['en'].menu;
 
+  // Hotfix for full Japanese menu support: fallback to ja value first if lang is ja
+  const value = {
+    lang,
+    setLang,
+    t: (key: TranslationStringKey) =>
+      lang === 'ja'
+        ? (translations.ja[key] || translations.en[key] || key)
+        : (translations.en[key] || key),
+    menu: () =>
+      lang === 'ja'
+        ? translations.ja.menu
+        : translations.en.menu
+  };
+
   return (
-    <I18nContext.Provider value={{ lang, setLang, t, menu }}>
+    <I18nContext.Provider value={value}>
       {children}
     </I18nContext.Provider>
   );

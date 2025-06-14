@@ -1,8 +1,84 @@
-
 import React from 'react';
 import { ArrowRight, Globe, Users, Zap } from 'lucide-react';
 import { smoothScroll } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n';
+
+const MatrixEffect = () => (
+  <div className="absolute inset-0 z-0 pointer-events-none select-none">
+    <div className="matrix-parent h-full w-full overflow-hidden">
+      <MatrixRain />
+    </div>
+  </div>
+);
+
+const MATRIX_CHARS = "アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+// Generates the visual matrix rain effect using canvas
+const MatrixRain = () => {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight / 1.22;
+    let fontSize = 18;
+    let columns = Math.floor(width / fontSize);
+    let drops = Array.from({ length: columns }, () => Math.random() * height / fontSize);
+
+    const draw = () => {
+      ctx.fillStyle = 'rgba(249,250,255,0.12)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = fontSize + "px monospace";
+      ctx.fillStyle = "rgba(67,99,235,0.86)";
+      for (let i = 0; i < drops.length; i++) {
+        let char = MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        if (Math.random() > 0.965) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    };
+    let animationId: number;
+    const animate = () => {
+      draw();
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+    const onResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight / 1.22;
+      columns = Math.floor(width / fontSize);
+      drops = Array.from({ length: columns }, () => Math.random() * height / fontSize);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="w-full h-full"
+      style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+        opacity: 0.28,
+        pointerEvents: 'none'
+      }}
+      aria-hidden="true"
+    />
+  );
+};
 
 const ModernHero = () => {
   const { t } = useI18n();
@@ -14,12 +90,15 @@ const ModernHero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-gray-50 to-blue-50">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-gray-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{animationDelay: '2s'}}></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{animationDelay: '4s'}}></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 pb-0">
+      {/* Matrix Effect underneath everything */}
+      <MatrixEffect />
+      {/* Gradient Blobs */}
+      <div className="absolute inset-0 z-0">
+        {/* blue gradient blob */}
+        <div className="absolute top-28 left-20 w-72 h-72 bg-yeti-blue rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-float"></div>
+        {/* purple gradient blob */}
+        <div className="absolute bottom-12 right-20 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-float" style={{animationDelay: '1.7s'}}></div>
       </div>
 
       {/* Grid Pattern */}

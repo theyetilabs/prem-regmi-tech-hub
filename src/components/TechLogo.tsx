@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useTheme } from '@/contexts/ThemeContext';
 
 interface TechLogoProps {
   size?: number;
@@ -8,19 +7,15 @@ interface TechLogoProps {
 }
 
 const TechLogo = ({ size = 40, className = '' }: TechLogoProps) => {
-  const { theme } = useTheme();
-  
   return (
     <div className={`relative group ${className}`}>
       <img 
         src="/lovable-uploads/55481b70-d540-48c2-8a35-c4ef51b32a7d.png" 
         alt="Yeti Labs Tech Logo" 
-        className={`w-${size/4} h-${size/4} transition-all duration-300 group-hover:scale-110 ${
-          theme === 'dark' ? 'filter invert brightness-0' : ''
-        }`}
         style={{ width: size, height: size }}
+        className="rounded-[18%] shadow-xl border-4 border-yeti-blue bg-white p-1"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+      <div className="absolute inset-0 rounded-[18%] pointer-events-none border-2 border-transparent group-hover:border-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] border-blue-500"></div>
     </div>
   );
 };

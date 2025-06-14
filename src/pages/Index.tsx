@@ -1,18 +1,14 @@
-
 import React from 'react';
 import ModernHeader from '@/components/ModernHeader';
 import ModernHero from '@/components/ModernHero';
 import ModernSection from '@/components/ModernSection';
-import YetiLabsMap from '@/components/YetiLabsMap';
 import Footer from '@/components/Footer';
-import { useTheme } from '@/contexts/ThemeContext';
 import { Linkedin, Globe, Briefcase, GraduationCap, Users, Target, Lightbulb, Award } from 'lucide-react';
 import { smoothScroll } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n';
 
 const Index = () => {
   const { t } = useI18n();
-  const { theme } = useTheme();
 
   const journeySteps = [
     {
@@ -59,19 +55,20 @@ const Index = () => {
     }
   ];
 
+  // Remove the Yeti Labs: Global Reach (map) section 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'dark' : ''}`}>
-      <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
+    <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-white via-blue-50 to-purple-50">
+      <div>
         <ModernHeader />
         <ModernHero />
 
         <ModernSection id="about" heading={t('aboutTitle')} background="gray">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-mono">
+              <p className="text-lg text-gray-700 leading-relaxed font-mono">
                 I am Prem Regmi, the Founder and CEO of The Yeti Labs, a technology consulting and software development company dedicated to unlocking Nepal's potential as a global technology leader. Born and raised in Pokhara in the 1990s, I was captivated by the rapid evolution of technology during my formative years.
               </p>
-              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-mono">
+              <p className="text-lg text-gray-700 leading-relaxed font-mono">
                 My international education and experiences have shaped my vision to bridge global tech opportunities with Nepal's talented workforce. My passion for social contribution drives my mission to create a skilled, inclusive workforce that can compete globally.
               </p>
               <div className="flex space-x-4 pt-4">
@@ -109,9 +106,9 @@ const Index = () => {
                     <step.icon className="h-8 w-8" />
                   </div>
                   <div className="flex-1 glass-card rounded-xl p-6 group-hover:shadow-xl transition-all duration-300 animate-float" style={{animationDelay: `${index * 0.5}s`}}>
-                    <div className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-2 font-mono">{step.year}</div>
-                    <h3 className="text-xl font-bold text-black dark:text-white mb-3 font-mono">{step.title}</h3>
-                    <p className="text-gray-700 dark:text-gray-300 font-mono">{step.description}</p>
+                    <div className="text-sm font-medium text-blue-600  mb-2 font-mono">{step.year}</div>
+                    <h3 className="text-xl font-bold text-black  mb-3 font-mono">{step.title}</h3>
+                    <p className="text-gray-700  font-mono">{step.description}</p>
                   </div>
                 </div>
               ))}
@@ -127,37 +124,19 @@ const Index = () => {
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 animate-glow">
                     <card.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-black dark:text-white mb-4 font-mono">{card.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-mono">{card.description}</p>
+                  <h3 className="text-xl font-bold text-black  mb-4 font-mono">{card.title}</h3>
+                  <p className="text-gray-700  leading-relaxed font-mono">{card.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </ModernSection>
 
-        <ModernSection id="yeti-labs" heading="The Yeti Labs: Global Reach">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center space-x-4 glass-card rounded-xl p-6 mb-8 animate-float">
-              <img 
-                src="/lovable-uploads/55481b70-d540-48c2-8a35-c4ef51b32a7d.png" 
-                alt="The Yeti Labs Logo" 
-                className={`h-16 w-16 transition-all duration-300 ${theme === 'dark' ? 'filter invert brightness-0' : ''}`}
-              />
-              <div className="text-left">
-                <h3 className="text-2xl font-bold text-black dark:text-white mb-2 font-mono">The Yeti Labs</h3>
-                <p className="text-gray-700 dark:text-gray-300 font-mono">Technology Consulting & Software Development</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8 font-mono">
-              "We assist businesses from all over the world to create the software for the future. We come up with solutions that help you get to your goal faster while ensuring control and adaptability."
-            </p>
-          </div>
-          <YetiLabsMap />
-        </ModernSection>
+        {/* REMOVE the old Yeti Labs: Global Reach section including the Map */}
 
         <ModernSection id="connect" heading={t('connectTitle')} background="gray">
           <div className="text-center max-w-2xl mx-auto">
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed font-mono">
+            <p className="text-lg text-gray-700  mb-8 leading-relaxed font-mono">
               Ready to explore how technology can drive social impact? Let's discuss opportunities to collaborate and build Nepal's tech future together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -172,7 +151,6 @@ const Index = () => {
             </div>
           </div>
         </ModernSection>
-
         <Footer />
       </div>
     </div>
