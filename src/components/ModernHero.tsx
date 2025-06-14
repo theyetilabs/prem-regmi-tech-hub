@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Globe, Users, Zap } from 'lucide-react';
 import { smoothScroll } from '@/lib/utils';
@@ -83,12 +84,20 @@ const MatrixRain = () => {
 const ModernHero = () => {
   const { t, lang } = useI18n();
 
-  // Use translated stats
-  const stats = (translations => {
-    // fallback for safety
-    if (!translations[lang] || !translations[lang].heroStats) return [];
-    return translations[lang].heroStats;
-  })(require('@/lib/i18n').default ? require('@/lib/i18n').default.translations : {en: {heroStats: []}, ja: {heroStats: []}});
+  // Get heroStats from translations object instead of t
+  const heroStats = React.useMemo(() => {
+    const translationsObj = require('@/lib/i18n').default?.translations || undefined;
+    if (translationsObj && lang in translationsObj) {
+      // fallback in case translations object available
+      return translationsObj[lang]?.heroStats || translationsObj["en"].heroStats;
+    }
+    // fallback to hardcoded values if SSR/missing
+    return [
+      { value: "3", label: lang === "ja" ? "国" : "Countries" },
+      { value: "50+", label: lang === "ja" ? "クライアント" : "Clients" },
+      { value: "100+", label: lang === "ja" ? "プロジェクト" : "Projects" }
+    ];
+  }, [lang]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 pb-0">
@@ -149,10 +158,9 @@ const ModernHero = () => {
 
           {/* Translated Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '1s'}}>
-            {stats.map((stat, index) => (
+            {heroStats.map((stat, index) => (
               <div key={index} className="text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-black rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {/* Provide suitable icon fallback */}
                   {index === 0 ? <Globe className="h-8 w-8 text-white"/> : index === 1 ? <Users className="h-8 w-8 text-white"/> : <Zap className="h-8 w-8 text-white"/>}
                 </div>
                 <div className="text-3xl font-bold text-black mb-1">{stat.value}</div>

@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 const translations = {
@@ -89,7 +90,12 @@ const translations = {
 
 type Language = 'en' | 'ja';
 
-type TranslationStringKey = Exclude<keyof typeof translations['en'], 'menu'>;
+// Only allow keys for pure string values
+type StringKey<T> = {
+  [K in keyof T]: T[K] extends string ? K : never;
+}[keyof T];
+
+type TranslationStringKey = StringKey<typeof translations['en']>;
 
 interface I18nContextProps {
   lang: Language;
@@ -102,25 +108,20 @@ const I18nContext = createContext<I18nContextProps | undefined>(undefined);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Language>('en');
-  
-  const t = (key: TranslationStringKey) =>
-    translations[lang][key] || translations['en'][key] || key;
-  
-  const menu = () =>
-    translations[lang].menu || translations['en'].menu;
 
-  // Hotfix for full Japanese menu support: fallback to ja value first if lang is ja
+  // Fallback always to English string if not available in selected language
+  const t = (key: TranslationStringKey): string =>
+    (translations[lang][key] as string) ??
+    (translations['en'][key] as string) ??
+    key;
+
+  const menu = () => translations[lang].menu || translations['en'].menu;
+
   const value = {
     lang,
     setLang,
-    t: (key: TranslationStringKey) =>
-      lang === 'ja'
-        ? (translations.ja[key] || translations.en[key] || key)
-        : (translations.en[key] || key),
-    menu: () =>
-      lang === 'ja'
-        ? translations.ja.menu
-        : translations.en.menu
+    t,
+    menu
   };
 
   return (
