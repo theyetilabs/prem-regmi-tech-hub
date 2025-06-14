@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import { smoothScroll } from '@/lib/utils';
@@ -12,13 +11,31 @@ const navItems = [
   { name: 'connect', id: 'connect' },
 ];
 
-const JP_FLAG_SRC = "/lovable-uploads/jp-flag.png"; // ensure you have this file
+const JP_FLAG_SRC = "/lovable-uploads/jp-flag.png"; // favicon and selector
 
 const ModernHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { lang, setLang, menu, t } = useI18n();
   const menuLabels = menu();
+
+  // Add effect to change favicon based on selected language
+  useEffect(() => {
+    let faviconLink = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+    // Remove old if needed
+    if (faviconLink) faviconLink.parentNode?.removeChild(faviconLink);
+
+    const newFavicon = document.createElement("link");
+    newFavicon.rel = "icon";
+    if (lang === "ja") {
+      newFavicon.href = JP_FLAG_SRC;
+      newFavicon.type = "image/png";
+    } else {
+      newFavicon.href = "/favicon.ico";
+      newFavicon.type = "image/x-icon";
+    }
+    document.head.appendChild(newFavicon);
+  }, [lang]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -159,4 +176,3 @@ const ModernHeader = () => {
 };
 
 export default ModernHeader;
-

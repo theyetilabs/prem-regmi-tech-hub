@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 const translations = {
@@ -6,7 +5,13 @@ const translations = {
     menu: ['About', 'Journey', 'Vision', 'Connect'],
     heroHi: "Hi, my name is",
     heroSubtitle: "Transforming Nepal into a Global Tech Hub",
-    heroDescription: "Founder & CEO of The Yeti Labs, bridging global technology opportunities with Nepal's talented workforce.",
+    heroDescription:
+      "Founder & CEO of The Yeti Labs, bridging global technology opportunities with Nepal's talented workforce.",
+    heroStats: [
+      { value: "3", label: "Countries" },
+      { value: "50+", label: "Clients" },
+      { value: "100+", label: "Projects" }
+    ],
     connectBtn: "Connect with Me",
     exploreBtn: "Explore My Journey",
     language: "Language",
@@ -42,7 +47,13 @@ const translations = {
     menu: ['私について', '経歴', 'ビジョン', '連絡'],
     heroHi: "こんにちは、私の名前は",
     heroSubtitle: "ネパールをグローバルテックハブに変革",
-    heroDescription: "The Yeti Labsの創設者兼CEO、グローバルなテクノロジーの機会とネパールの優秀な人材を橋渡し。",
+    heroDescription:
+      "The Yeti Labsの創設者兼CEOとして、グローバルなテクノロジーの機会とネパールの才能ある人材をつなげます。",
+    heroStats: [
+      { value: "3", label: "国" },
+      { value: "50+", label: "クライアント" },
+      { value: "100+", label: "プロジェクト" }
+    ],
     connectBtn: "私に連絡する",
     exploreBtn: "私の旅を探る",
     language: "言語",

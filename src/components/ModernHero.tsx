@@ -81,13 +81,14 @@ const MatrixRain = () => {
 };
 
 const ModernHero = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
-  const stats = [
-    { icon: Globe, value: "3", label: "Countries" },
-    { icon: Users, value: "50+", label: "Clients" },
-    { icon: Zap, value: "100+", label: "Projects" }
-  ];
+  // Use translated stats
+  const stats = (translations => {
+    // fallback for safety
+    if (!translations[lang] || !translations[lang].heroStats) return [];
+    return translations[lang].heroStats;
+  })(require('@/lib/i18n').default ? require('@/lib/i18n').default.translations : {en: {heroStats: []}, ja: {heroStats: []}});
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-blue-50 to-purple-50 pb-0">
@@ -112,19 +113,19 @@ const ModernHero = () => {
             <span className="text-sm font-medium text-gray-600">{t('heroHi')}</span>
           </div>
 
-          {/* Main Heading */}
+          {/* Name */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
             <span className="gradient-text">Prem Regmi</span>
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle (translated) */}
           <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-700 mb-8 font-light leading-relaxed animate-fade-in-up max-w-3xl mx-auto" style={{animationDelay: '0.4s'}}>
-            Transforming Nepal into a <span className="font-semibold text-blue-600">Global Tech Hub</span>
+            {t('heroSubtitle')}
           </h2>
 
-          {/* Description */}
+          {/* Description (translated) */}
           <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{animationDelay: '0.6s'}}>
-            Founder & CEO of The Yeti Labs, bridging global technology opportunities with Nepal's talented workforce.
+            {t('heroDescription')}
           </p>
 
           {/* CTA Buttons */}
@@ -134,7 +135,7 @@ const ModernHero = () => {
               className="btn-primary group"
             >
               <span className="relative z-10 flex items-center justify-center">
-                Explore My Journey
+                {lang === 'ja' ? '経歴を探る' : 'Explore My Journey'}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </button>
@@ -146,12 +147,13 @@ const ModernHero = () => {
             </button>
           </div>
 
-          {/* Stats */}
+          {/* Translated Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in-up" style={{animationDelay: '1s'}}>
             {stats.map((stat, index) => (
               <div key={index} className="text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-black rounded-xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <stat.icon className="h-8 w-8 text-white" />
+                  {/* Provide suitable icon fallback */}
+                  {index === 0 ? <Globe className="h-8 w-8 text-white"/> : index === 1 ? <Users className="h-8 w-8 text-white"/> : <Zap className="h-8 w-8 text-white"/>}
                 </div>
                 <div className="text-3xl font-bold text-black mb-1">{stat.value}</div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
