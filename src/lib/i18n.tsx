@@ -20,18 +20,26 @@ const translations = {
 
 type Language = 'en' | 'ja';
 
+type TranslationStringKey = Exclude<keyof typeof translations['en'], 'menu'>;
+type TranslationMenuKey = 'menu';
+
 interface I18nContextProps {
   lang: Language;
   setLang: (lang: Language) => void;
-  t: (key: keyof typeof translations['en']) => string;
+  t: (key: TranslationStringKey) => string;
+  menu: () => string[];
 }
 const I18nContext = createContext<I18nContextProps | undefined>(undefined);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Language>('en');
-  const t = (key: keyof typeof translations['en']) => translations[lang][key] || translations['en'][key] || key;
+  const t = (key: TranslationStringKey) =>
+    translations[lang][key] || translations['en'][key] || key;
+  const menu = () =>
+    (translations[lang].menu || translations['en'].menu);
+
   return (
-    <I18nContext.Provider value={{ lang, setLang, t }}>
+    <I18nContext.Provider value={{ lang, setLang, t, menu }}>
       {children}
     </I18nContext.Provider>
   );

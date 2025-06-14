@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { smoothScroll } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
@@ -16,7 +17,7 @@ import { Globe } from 'lucide-react';
 const Header = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const { lang, setLang, t } = useI18n();
+  const { lang, setLang, t, menu } = useI18n();
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -28,6 +29,8 @@ const Header = () => {
     smoothScroll(id);
     setIsMenuOpen(false);
   };
+
+  const menuLabels = menu();
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
@@ -43,7 +46,7 @@ const Header = () => {
               onClick={() => handleNavClick(item.id)}
               className="text-black hover:text-gray-800 transition-colors duration-300 font-mono text-sm uppercase tracking-wide"
             >
-              <span className="text-gray-500 font-bold">0{idx + 1}.</span> {t('menu')[idx]}
+              <span className="text-gray-500 font-bold">0{idx + 1}.</span> {menuLabels[idx]}
             </button>
           ))}
           <div className="ml-4 flex items-center">
@@ -79,7 +82,7 @@ const Header = () => {
                 onClick={() => handleNavClick(item.id)}
                 className="text-2xl text-black hover:text-gray-800 transition-colors duration-300 font-mono"
               >
-                <span className="text-gray-500 font-bold">0{idx + 1}.</span> {t('menu')[idx]}
+                <span className="text-gray-500 font-bold">0{idx + 1}.</span> {menuLabels[idx]}
               </button>
             ))}
             <div className="mt-8 flex items-center">
@@ -100,3 +103,4 @@ const Header = () => {
 };
 
 export default Header;
+
