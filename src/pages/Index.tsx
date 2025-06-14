@@ -1,165 +1,173 @@
+
 import React from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import AnimatedSection from '@/components/AnimatedSection';
-import ParticlesBG from '@/components/ParticlesBG';
+import ModernHeader from '@/components/ModernHeader';
+import ModernHero from '@/components/ModernHero';
+import ModernSection from '@/components/ModernSection';
 import YetiLabsMap from '@/components/YetiLabsMap';
-import { Linkedin, Globe, Briefcase, GraduationCap, Users } from 'lucide-react';
+import Footer from '@/components/Footer';
+import { Linkedin, Globe, Briefcase, GraduationCap, Users, Target, Lightbulb, Award } from 'lucide-react';
 import { smoothScroll } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n';
 
 const Index = () => {
   const { t } = useI18n();
 
+  const journeySteps = [
+    {
+      year: "2008-2012",
+      title: "Foundation Years",
+      description: "Bachelor's in Software Engineering at Gandaki College of Engineering and Science",
+      icon: GraduationCap
+    },
+    {
+      year: "2014-2017",
+      title: "International Education",
+      description: "Degree in Information Science from Oslo and Akershus University College",
+      icon: Globe
+    },
+    {
+      year: "2018-2020",
+      title: "Industry Experience",
+      description: "Roles at ClinchTech and Black Tech, COO at Mero Padhai",
+      icon: Briefcase
+    },
+    {
+      year: "2021-Present",
+      title: "The Yeti Labs",
+      description: "Founded and leading Nepal's premier tech consulting company",
+      icon: Target
+    }
+  ];
+
+  const visionCards = [
+    {
+      icon: Lightbulb,
+      title: "Innovation Leadership",
+      description: "Driving technological innovation that bridges global opportunities with local talent, creating sustainable solutions for Nepal's tech ecosystem."
+    },
+    {
+      icon: Users,
+      title: "Inclusive Growth",
+      description: "Building an inclusive workforce that welcomes talent from all backgrounds, fostering diversity and equality in Nepal's tech sector."
+    },
+    {
+      icon: Award,
+      title: "Global Impact",
+      description: "Positioning Nepal as a premier destination for tech talent and innovation, creating opportunities that benefit both local communities and global markets."
+    }
+  ];
+
   return (
-    <div className="bg-white text-black min-h-screen overflow-x-clip">
-      <Header />
-      <main className="container mx-auto px-6 md:px-10 lg:px-20 relative">
-        {/* Hero Section */}
-        <section id="hero" className="relative min-h-[85vh] flex flex-col justify-center items-start text-left overflow-hidden mb-24">
-          <ParticlesBG />
-          <div className="relative z-10 mt-24 md:mt-0">
-            <p className="font-mono text-black mb-2 animate-fade-in-up">{t('heroHi')}</p>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-black mb-2 animate-fade-in-up" style={{ fontFamily: 'Space Grotesk, monospace' }}>
-              Prem Regmi.
-            </h1>
-            <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold text-black animate-fade-in-up" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Transforming Nepal into a Global Tech Hub.
-            </h2>
-            <p className="mt-6 max-w-xl text-lg animate-fade-in-up">
-              I'm the Founder and CEO of The Yeti Labs, a technology consulting and software development company dedicated to unlocking Nepal's potential as a global technology leader.
+    <div className="bg-white text-black min-h-screen">
+      <ModernHeader />
+      <ModernHero />
+
+      <ModernSection id="about" heading="About Me" background="gray">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-6">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              I am Prem Regmi, the Founder and CEO of The Yeti Labs, a technology consulting and software development company dedicated to unlocking Nepal's potential as a global technology leader. Born and raised in Pokhara in the 1990s, I was captivated by the rapid evolution of technology during my formative years.
             </p>
-            <button
-              onClick={() => smoothScroll('connect')}
-              className="mt-10 font-mono text-yeti-blue border border-yeti-blue rounded px-8 py-4 bg-transparent hover:bg-yeti-blue hover:text-white transition-colors duration-300 shadow animate-fade-in-up"
-            >
-              {t('connectBtn')}
-            </button>
-          </div>
-        </section>
-
-        <AnimatedSection id="about" heading="About Me">
-          <div className="grid md:grid-cols-5 gap-12 items-center">
-            <div className="md:col-span-3 space-y-4 text-light-slate">
-              <p>I am Prem Regmi, the Founder and CEO of The Yeti Labs, a technology consulting and software development company dedicated to unlocking Nepal's potential as a global technology leader. Born and raised in Pokhara in the 1990s, I was captivated by the rapid evolution of technology during my formative years. This fascination led me to pursue a career in tech, culminating in a degree in Information Science from Oslo and Akershus University College. My international education and experiences have shaped my vision to bridge global tech opportunities with Nepal’s talented workforce.</p>
-              <p>My passion for social contribution drives my mission to create a skilled, inclusive workforce that can compete globally, fostering an environment that welcomes talent from all backgrounds without bias.</p>
-            </div>
-            <div className="md:col-span-2">
-              <div className="relative group w-full max-w-sm mx-auto">
-                <div className="absolute -inset-0.5 bg-gradient-to-br from-yeti-blue/30 to-purple-400/20 rounded-lg blur opacity-90 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                <img src="/lovable-uploads/55e37f60-8432-43da-8cc4-fa4a371ff61b.png" alt="Prem Regmi" className="relative w-full rounded-lg shadow-lg" />
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection id="journey" heading="My Journey">
-          <div className="relative border-l-2 border-yeti-blue/30 pl-12 space-y-16">
-            {/* Journey timeline points with animations can be done here */}
-            <div className="absolute -left-[14px] top-3 w-6 h-6 bg-yeti-blue/90 rounded-full border-4 border-white animate-glow"></div>
-            <div>
-              <h3 className="text-xl font-bold text-black mb-2 font-mono">Early Inspiration</h3>
-              <p className="text-light-slate">Growing up in Pokhara, I witnessed the transformative power of technology, which inspired me to pursue a tech-focused career. My degree opened my eyes to the potential of digitalization in addressing educational gaps in Nepal’s rural regions.</p>
-            </div>
-            <div className="absolute -left-[14px] top-1/3 w-6 h-6 bg-yeti-blue/90 rounded-full border-4 border-white animate-glow"></div>
-            <div>
-              <h3 className="text-xl font-bold text-black mb-2 font-mono">Founding The Yeti Labs</h3>
-              <p className="text-light-slate">I established The Yeti Labs to position Nepal as a tech outsourcing hub. Today, the company operates in Nepal, Australia, and the USA, delivering innovative IT solutions to global clients.</p>
-            </div>
-            <div className="absolute -left-[14px] top-2/3 w-6 h-6 bg-yeti-blue/90 rounded-full border-4 border-white animate-glow"></div>
-            <div>
-              <h3 className="text-xl font-bold text-black mb-2 font-mono">Empowering Through Education</h3>
-              <p className="text-light-slate">Recognizing the need for skilled talent, I aim to launch tech training bootcamps across Nepal, equipping students with expertise in software development, cybersecurity, and cloud technologies. These programs will impact thousands, preparing a future-ready workforce.</p>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection id="vision" heading="Leadership & Vision">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-light-navy/50 p-6 rounded-lg shadow-md hover:scale-105 transition-transform">
-              <h3 className="text-xl font-bold text-black mb-2 font-mono">Leadership Philosophy</h3>
-              <p className="text-light-slate">I believe technology is a catalyst for positive change. My leadership is rooted in inclusivity, innovation, and integrity. At The Yeti Labs, we foster an environment where diverse talent thrives, and I am committed to channeling global tech opportunities to Nepal to build a sustainable IT sector that empowers communities.</p>
-            </div>
-             <div className="bg-light-navy/50 p-6 rounded-lg shadow-md hover:scale-105 transition-transform">
-              <h3 className="text-xl font-bold text-black mb-2 font-mono">Vision for the Future</h3>
-              <p className="text-light-slate">My vision is to position Nepal as a premier destination for tech talent and innovation. By investing in education, infrastructure, and community engagement, I aim to create a sustainable tech ecosystem that benefits Nepal and the global community. I envision a Nepal where every corner has access to world-class tech training, empowering our youth to lead the future of technology.</p>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection id="background" heading="Professional Background">
-          <div className="space-y-8">
-            <div className="flex items-start space-x-4">
-              <span className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-yeti-blue/90 text-white rounded-full shadow-md animate-glow"><span className="font-mono font-bold text-lg">1</span></span>
-              <div>
-                <h3 className="font-bold text-black text-lg">Chief Operating Officer, Mero Padhai</h3>
-                <p className="text-light-slate">Collaborated with a brilliant team to bridge educational gaps in Nepal’s rural regions through digital solutions.</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <span className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-yeti-blue/90 text-white rounded-full shadow-md animate-glow"><span className="font-mono font-bold text-lg">2</span></span>
-              <div>
-                <h3 className="font-bold text-black text-lg">Previous Roles</h3>
-                <p className="text-light-slate">Held positions at ClinchTech and Black Tech, gaining expertise in software engineering and technology consulting.</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <span className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-yeti-blue/90 text-white rounded-full shadow-md animate-glow"><span className="font-mono font-bold text-lg">3</span></span>
-              <div>
-                <h3 className="font-bold text-black text-lg">Degree in Information Science</h3>
-                <p className="text-light-slate">Oslo and Akershus University College</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <span className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-yeti-blue/90 text-white rounded-full shadow-md animate-glow"><span className="font-mono font-bold text-lg">4</span></span>
-              <div>
-                <h3 className="font-bold text-black text-lg">Bachelor’s in Software Engineering</h3>
-                <p className="text-light-slate">Gandaki College of Engineering and Science (2008–2012)</p>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        {/* The Yeti Labs Section */}
-        <AnimatedSection id="yeti-labs" heading="The Yeti Labs: Our Mission">
-          <div className="bg-white border border-yeti-blue/15 p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
-            <img src="/lovable-uploads/5f1c40f8-4798-452e-8ba1-737f048eab9e.png" alt="The Yeti Labs Logo" className="h-16 w-16 mx-auto mb-4 grayscale animate-fade-in-up" />
-            <p className="text-black italic text-lg max-w-3xl mx-auto">
-              “We assist businesses from all over the world to create the software for the future. We come up with solutions that help you get to your goal faster while ensuring control and adaptability.”
+            <p className="text-lg text-gray-700 leading-relaxed">
+              My international education and experiences have shaped my vision to bridge global tech opportunities with Nepal's talented workforce. My passion for social contribution drives my mission to create a skilled, inclusive workforce that can compete globally.
             </p>
-            <p className="mt-4 text-black">Our services include technology consulting, software development, product design, and training programs.</p>
+            <div className="flex space-x-4 pt-4">
+              <a href="https://www.linkedin.com/in/regmiprem/" target="_blank" rel="noopener noreferrer" className="btn-outline">
+                <Linkedin className="mr-2 h-5 w-5" />
+                LinkedIn
+              </a>
+              <a href="https://theyetilabs.com/" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                <Globe className="mr-2 h-5 w-5" />
+                Visit Website
+              </a>
+            </div>
           </div>
-        </AnimatedSection>
+          <div className="relative">
+            <div className="tech-border rounded-2xl p-1 animate-glow">
+              <img 
+                src="/lovable-uploads/55e37f60-8432-43da-8cc4-fa4a371ff61b.png" 
+                alt="Prem Regmi" 
+                className="w-full rounded-xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </ModernSection>
 
-        {/* Yeti Labs Locations Map Section */}
-        <AnimatedSection id="yeti-labs-map" heading="Yeti Labs – Global Locations">
-          <p className="mb-6 text-center max-w-xl mx-auto text-black font-semibold">
-            Yeti Labs currently operates in <b className="text-yeti-blue">Nepal, USA, and Australia</b>.
+      <ModernSection id="journey" heading="My Journey">
+        <div className="relative">
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-black"></div>
+          <div className="space-y-12">
+            {journeySteps.map((step, index) => (
+              <div key={index} className="relative flex items-start space-x-8 group">
+                <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-500 to-black rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+                  <step.icon className="h-8 w-8" />
+                </div>
+                <div className="flex-1 glass-card rounded-xl p-6 group-hover:shadow-xl transition-all duration-300">
+                  <div className="text-sm font-medium text-blue-600 mb-2">{step.year}</div>
+                  <h3 className="text-xl font-bold text-black mb-3">{step.title}</h3>
+                  <p className="text-gray-700">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </ModernSection>
+
+      <ModernSection id="vision" heading="Leadership & Vision" background="gradient">
+        <div className="grid md:grid-cols-3 gap-8">
+          {visionCards.map((card, index) => (
+            <div key={index} className="group">
+              <div className="glass-card rounded-xl p-8 h-full group-hover:shadow-xl transition-all duration-300">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-black rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <card.icon className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-bold text-black mb-4">{card.title}</h3>
+                <p className="text-gray-700 leading-relaxed">{card.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </ModernSection>
+
+      <ModernSection id="yeti-labs" heading="The Yeti Labs: Global Reach">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center space-x-4 glass-card rounded-xl p-6 mb-8">
+            <img 
+              src="/lovable-uploads/5f1c40f8-4798-452e-8ba1-737f048eab9e.png" 
+              alt="The Yeti Labs Logo" 
+              className="h-16 w-16 grayscale hover:grayscale-0 transition-all duration-300"
+            />
+            <div className="text-left">
+              <h3 className="text-2xl font-bold text-black mb-2">The Yeti Labs</h3>
+              <p className="text-gray-700">Technology Consulting & Software Development</p>
+            </div>
+          </div>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+            "We assist businesses from all over the world to create the software for the future. We come up with solutions that help you get to your goal faster while ensuring control and adaptability."
           </p>
-          <YetiLabsMap />
-        </AnimatedSection>
+        </div>
+        <YetiLabsMap />
+      </ModernSection>
 
-        {/* Connect Section */}
-        <AnimatedSection id="connect" heading={
-          <span>
-            <span className="font-mono text-yeti-blue">What's Next?</span><br/>
-            <span className="text-4xl md:text-5xl font-bold text-black">Get In Touch</span>
-          </span>
-        }>
-          <p className="max-w-xl mx-auto text-light-slate mb-8">Let’s connect to explore how technology can drive social impact or to learn more about The Yeti Labs’ journey toward making Nepal a global tech hub.</p>
-          <div className="flex justify-center space-x-6">
-            <a href="https://www.linkedin.com/in/regmiprem/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 font-mono text-yeti-blue border border-yeti-blue rounded px-6 py-3 hover:bg-yeti-blue/10 transition-colors duration-300 shadow">
-              <Linkedin size={20} />
-              <span>LinkedIn</span>
+      <ModernSection id="connect" heading="Let's Connect" background="gray">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            Ready to explore how technology can drive social impact? Let's discuss opportunities to collaborate and build Nepal's tech future together.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://www.linkedin.com/in/regmiprem/" target="_blank" rel="noopener noreferrer" className="btn-primary">
+              <Linkedin className="mr-2 h-5 w-5" />
+              Connect on LinkedIn
             </a>
-            <a href="https://theyetilabs.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 font-mono text-yeti-blue border border-yeti-blue rounded px-6 py-3 hover:bg-yeti-blue/10 transition-colors duration-300 shadow">
-              <Globe size={20} />
-              <span>Company Website</span>
+            <a href="https://theyetilabs.com/" target="_blank" rel="noopener noreferrer" className="btn-outline">
+              <Globe className="mr-2 h-5 w-5" />
+              Visit The Yeti Labs
             </a>
           </div>
-        </AnimatedSection>
+        </div>
+      </ModernSection>
 
-      </main>
       <Footer />
     </div>
   );
