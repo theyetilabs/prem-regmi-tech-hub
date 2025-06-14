@@ -6,19 +6,22 @@ import * as THREE from 'three';
 
 const Globe = () => {
   const ref = useRef<THREE.Points>(null!);
-  const [sphere] = useMemo(() => {
+
+  const sphere = useMemo(() => {
     const points = new THREE.SphereGeometry(2.5, 48, 48);
     const positions = points.attributes.position.array;
     const randomPositions = new Float32Array(positions.length);
     for (let i = 0; i < positions.length; i++) {
-        randomPositions[i] = positions[i] + (Math.random() - 0.5) * 0.1;
+      randomPositions[i] = positions[i] + (Math.random() - 0.5) * 0.1;
     }
-    return [randomPositions];
+    return randomPositions;
   }, []);
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 15;
-    ref.current.rotation.y -= delta / 20;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 15;
+      ref.current.rotation.y -= delta / 20;
+    }
   });
 
   return (
@@ -44,6 +47,5 @@ const GlobeCanvas = () => (
     </Canvas>
   </div>
 );
-
 
 export default GlobeCanvas;
